@@ -1,0 +1,5 @@
+source: ./ # The root directory of your Jekyll site
+destination: ./_site # The directory where the generated site will be stored
+plugins: [] # Any Jekyll plugins you want to use, listed here
+
+# Additional configurations can be added as needed

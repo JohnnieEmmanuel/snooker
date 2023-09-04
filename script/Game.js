@@ -18,6 +18,14 @@ function Game_Singleton() {
     this.sound = true;
 
     this.mainMenu = new Menu();
+        // Add power bar properties
+        this.powerBarX = 50; // X-coordinate of the bar's top-left corner
+        this.powerBarY = 400; // Y-coordinate of the bar's top-left corner
+        this.powerBarWidth = 20; // Width of the bar
+        this.powerBarHeight = 200; // Height of the bar
+        this.currentPowerLevel = 0; // Current power level (initially 0)
+        this.chargingShot = false; // Flag to indicate if the player is charging the shot
+    
 }
 
 Game_Singleton.prototype.start = function (divName, canvasName, x, y) {
@@ -79,6 +87,29 @@ Game_Singleton.prototype.handleInput = function(){
         requestAnimationFrame(Game.mainMenu.load.bind(this.mainMenu));
     }
 }
+
+Game_Singleton.prototype.updatePowerBar = function () {
+    // Check if the player is charging the shot (e.g., touch is active)
+    if (Touch.isTouchDown &&
+        Touch.touchPosition.x > this.powerBarX &&
+        Touch.touchPosition.x < this.powerBarX + this.powerBarWidth &&
+        Touch.touchPosition.y > this.powerBarY &&
+        Touch.touchPosition.y < this.powerBarY + this.powerBarHeight) {
+        // Calculate the power level based on touch position within the bar
+        var touchY = Touch.touchPosition.y;
+        var maxBarY = this.powerBarY + this.powerBarHeight;
+        this.currentPowerLevel = Math.min(1, (maxBarY - touchY) / this.powerBarHeight);
+
+        // Set the flag to indicate the player is charging the shot
+        this.chargingShot = true;
+    } else {
+        // Player released the touch or moved outside the power bar area
+        // Reset the power level and the charging flag
+        this.currentPowerLevel = 0;
+        this.chargingShot = false;
+    }
+};
+
 
 Game_Singleton.prototype.startNewGame = function(){
     Canvas2D._canvas.style.cursor = "auto";

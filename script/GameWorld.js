@@ -203,8 +203,15 @@ GameWorld.prototype.draw = function () {
     }
 
     this.stick.draw();
+    this.drawShootingBar();
 };
+GameWorld.prototype.drawShootingBar = function () {
+    // Draw the power bar on the canvas
+    Canvas2D.drawRect(this.powerBarX, this.powerBarY, this.powerBarWidth, this.powerBarHeight, "green");
 
+    // Adjust the color or fill based on the current power level
+    // Example: Set a color gradient or change the bar's fill based on power
+};
 GameWorld.prototype.reset = function () {
     this.gameOver = false;
 

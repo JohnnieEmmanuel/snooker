@@ -112,6 +112,18 @@ Canvas2D_Singleton.prototype.drawText = function (text, position, origin, color,
     this._canvasContext.fillText(text, 0, 0);
     this._canvasContext.restore();
 };
+// Add the drawRect function to Canvas2D
+Canvas2D_Singleton.prototype.drawRect = function (x, y, width, height, color) {
+    var canvasScale = this.scale;
+    
+    x *= canvasScale.x;
+    y *= canvasScale.y;
+    width *= canvasScale.x;
+    height *= canvasScale.y;
+
+    this._canvasContext.fillStyle = color;
+    this._canvasContext.fillRect(x, y, width, height);
+};
 
 var Canvas2D = new Canvas2D_Singleton();
 

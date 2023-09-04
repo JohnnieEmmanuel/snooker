@@ -1,6 +1,8 @@
 "use strict";
 
 function GameWorld() {
+    this.powerBarX = 50; // X-coordinate of the bar's top-left corner
+    this.powerBarY = 400; // Y-coordinate of the bar's top-left corner
 
     this.whiteBallStartingPosition = new Vector2(413,413);
 
@@ -207,7 +209,9 @@ GameWorld.prototype.draw = function () {
 };
 GameWorld.prototype.drawShootingBar = function () {
     // Draw the power bar on the canvas
-    Canvas2D.drawRect(this.powerBarX, this.powerBarY, this.powerBarWidth, this.powerBarHeight, "green");
+    this.powerBarWidth = 30;
+    this.powerBarHeight =200;
+    Canvas2D.drawRect(this.powerBarX, this.powerBarY, this.powerBarWidth, this.powerBarHeight, "blue");
 
     // Adjust the color or fill based on the current power level
     // Example: Set a color gradient or change the bar's fill based on power
